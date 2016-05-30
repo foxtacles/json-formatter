@@ -217,6 +217,16 @@
     // First, check if it's a PRE and exit if not
       var bodyChildren = document.body.childNodes ;
       pre = bodyChildren[0] ;
+
+      if (pre && 
+          !pre.innerText) {
+        var text = pre.textContent ;
+        document.body.removeChild(pre) ;
+        pre = document.createElement('pre') ;
+        pre.innerText = text;
+        document.body.appendChild(pre) ;
+      }
+
       var jsonLength = (pre && pre.innerText || "").length ;
       if (
         bodyChildren.length !== 1 ||
